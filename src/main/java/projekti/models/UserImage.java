@@ -1,4 +1,4 @@
-package fi.dy.laakso.vanhankansanfacebook.Models;
+package projekti.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;

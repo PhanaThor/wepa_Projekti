@@ -1,4 +1,4 @@
-package fi.dy.laakso.vanhankansanfacebook.Controllers;
+package projekti.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

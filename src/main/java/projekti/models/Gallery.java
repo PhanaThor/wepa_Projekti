@@ -1,7 +1,7 @@
-package fi.dy.laakso.vanhankansanfacebook.Models;
+package projekti.models;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

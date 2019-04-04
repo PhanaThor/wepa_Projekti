@@ -8,11 +8,11 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>fi.dy.laakso</groupId>
-	<artifactId>vanhankansanfacebook</artifactId>
+	<groupId>tkt</groupId>
+	<artifactId>wepa_Projekti</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>vanhankansanfacebook</name>
-	<description>Vanhan Kansan Facebook</description>
+	<name>wepa_Projekti</name>
+	<description>Web-palvelinohjelmointi 2019 MOOC-kurssin projektityö</description>
 
 	<properties>
 		<java.version>1.8</java.version>
