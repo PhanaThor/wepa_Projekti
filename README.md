@@ -1,4 +1,4 @@
-# wepa-Projekti  
+# wepa_Projekti  
 
 | Branch        | Status        |
 | ------------- |:-------------:|
