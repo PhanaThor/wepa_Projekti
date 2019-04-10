@@ -18,4 +18,10 @@ public class UserController {
         
         return "users/index";
     }
+
+    @GetMapping("/login")
+    public String getLogin(Model model) {
+        
+        return "login";
+    }
 }
