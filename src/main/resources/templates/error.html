@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <title>VKF - Error</title>
+    </head>
+    <body>
+        <main  role="main">
+            <div class="container">
+                <div class="card border-danger ml-auto mr-auto mt-5 mb-5">
+                    <div class="card-header">
+                        <h4 class="card-title"><span th:text="${status}">HTTPStatus</span> - <span th:text="${error}">Error</span></h4>
+                        <h6 class="card-subtitle text-muted"><span th:text="${timestamp}">Timestamp</span></h6>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" th:if="${message != 'No message available'}"><span th:text="${message}">Message</span></h5>
+                        <h6>Requested path: <span class="card-text" th:text="${path}"></span></h6>  
+                        <h6 th:if="${exception == ''}">Exception: <span class="card-text" th:text="${exception}"></span></h6>                    
+                        <pre class="card-text" th:if="${trace != ''}" th:text="${trace}"></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="fragments/footer :: footer">
+        </footer>
+    </body>
+</html>
