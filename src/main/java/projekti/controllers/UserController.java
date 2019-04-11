@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import projekti.repositories.UserRepository;
 
@@ -16,18 +17,9 @@ public class UserController {
     @GetMapping("/users")
     public String getIndex(Model model) {
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("loggedUserProfileStr", "MrSample");
         
         return "users/index";
-    }
-
-    @GetMapping("/login")
-    public String getLogin(Model model) {        
-        return "login";
-    }
-
-    @GetMapping("/logout")
-    public String getLogout(Model model) {        
-        return "login";
     }
 
     @GetMapping("/profile/{userProfileName}")
