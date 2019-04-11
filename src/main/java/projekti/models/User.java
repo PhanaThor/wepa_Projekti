@@ -1,7 +1,6 @@
 package projekti.models;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -14,10 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends AbstractPersistable<Long> {
-    private String userName;
-    private String passwordHash;
+    private String loginName;
+    private String password;
     private String name;
     private String profileName;
-    @OneToOne
-    private Gallery imageGallery;
 }

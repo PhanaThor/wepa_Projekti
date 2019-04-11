@@ -9,8 +9,15 @@
     </head>
     <body>
         <main  role="main">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-outline-warning" href="/" th:href="@{/}">Back</a>
+                    </div>
+                </div>
+            </div>
             <div class="container">
-                <div class="card border-danger ml-auto mr-auto mt-5 mb-5">
+                <div class="card border-danger ml-auto mr-auto mt-2 mb-5">
                     <div class="card-header">
                         <h4 class="card-title"><span th:text="${status}">HTTPStatus</span> - <span th:text="${error}">Error</span></h4>
                         <h6 class="card-subtitle text-muted"><span th:text="${timestamp}">Timestamp</span></h6>
@@ -22,8 +29,7 @@
                         <pre class="card-text" th:if="${trace != ''}" th:text="${trace}"></pre>
                     </div>
                 </div>
-            </div>
+            </div>            
         </main>
-        <footer th:replace="fragments/footer :: footer"></footer>
     </body>
 </html>

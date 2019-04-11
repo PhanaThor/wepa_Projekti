@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{_layout}">
+    <head>
+        <title th:text="'Profile [ ' + ${profileName} + ' ]'">Profile</title>
+    </head>
+    <body>
+        <div class="container" layout:fragment="content">
+            <div class="jumbotron" th:if="${profile != null}">
+                <h2><span th:text="${profileName}"></span></h2>
+                <h2><span th:text="${profile.name}"></span></h2>
+            </div>
+            <div class="jumbotron" th:if="${profile == null}">
+                <h1 class="display-4">Profile not found!</h1>
+                <p class="lead">Profile &quot;<span th:text="${profileName}"></span>&quot; could not be found!</p>                    
+            </div>
+        </div>
+    </body>
+</html>
