@@ -8,11 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import projekti.repositories.AccountRepository;
 
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,9 +34,7 @@ public class AccountControllerTests {
 	}
 
 	@Test
-	public void canGetUsers() throws Exception {
-		MvcResult result = mockMvc.perform(get(API_URI)).andExpect(status().isOk()).andReturn();
-
-		assertTrue("Model should contain \"users\"", result.getModelAndView().getModel().containsKey("users"));
+	public void tryGetUsersWithoutAuthentication() throws Exception {
+		mockMvc.perform(get(API_URI)).andExpect(status().is3xxRedirection());
 	}
 }

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{_layout}">
+    <head>
+        <title>Register new user</title>
+    </head>
+    <body>
+        <header layout:fragment="header"></header>
+        <div class="container" layout:fragment="content">
+            <div class="card border-warning ml-auto mr-auto mt-5" style="max-width: 20rem;">
+                <div class="card-header">
+                    <h4 class="card-title">VKF - Register</h4>
+                </div>
+                <div class="card-body">
+                    <div th:if="${param.uexists}" class="alert alert-danger"> 
+                        Username already exists.
+                    </div>
+                    <div th:if="${param.pexists}" class="alert alert-danger"> 
+                        Profile name already exists.
+                    </div>
+                    <div th:if="${param.missing}" class="alert alert-danger">    
+                        Please fill all fields.
+                    </div>
+                    <div th:if="${param.mismatch}" class="alert alert-danger"> 
+                        Passwords don't match.
+                    </div>
+                    <form method="POST" th:action="@{/users/register}">                        
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="profilename">Profile name:</label>
+                            <input type="text" class="form-control" id="profileName" name="profileName" placeholder="Profile name">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="password2">Confirm password:</label>
+                            <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -23,11 +23,8 @@ public class VKFUserDetailsService implements UserDetailsService {
         Account account = accountRepository.findByUsername(username);
         if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
-        }
+        }        
         
-
-        return null;
-        /*
         return new org.springframework.security.core.userdetails.User(
                 account.getUsername(),
                 account.getPassword(),
@@ -35,7 +32,6 @@ public class VKFUserDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                Arrays.asList(new SimpleGrantedAuthority("USER")));
-                */
+                Arrays.asList(new SimpleGrantedAuthority("USER")));                
     }
 }
