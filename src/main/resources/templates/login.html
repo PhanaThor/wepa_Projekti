@@ -11,6 +11,12 @@
                     <h4 class="card-title">VKF - Login</h4>
                 </div>
                 <div class="card-body">
+                    <div th:if="${param.error}" class="alert alert-danger">    
+                        Invalid username or password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success"> 
+                        You have been logged out.
+                    </div>
                     <form method="POST" th:action="@{/login}">
                         <div class="form-group">
                             <label for="username">Username:</label>

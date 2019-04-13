@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import projekti.repositories.UserRepository;
+import projekti.repositories.AccountRepository;
 
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class UserControllerTests {
+public class AccountControllerTests {
 
 	private final String API_URI = "/users";
 
@@ -29,10 +29,10 @@ public class UserControllerTests {
 	private MockMvc mockMvc;
 
 	@Autowired
-	private UserRepository userRepository;
+	private AccountRepository accountRepository;
 
 	public void Init() {
-		userRepository.deleteAll();
+		accountRepository.deleteAll();
 	}
 
 	@Test

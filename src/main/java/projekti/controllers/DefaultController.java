@@ -12,4 +12,9 @@ public class DefaultController {
         model.addAttribute("loggedUserProfileStr", "MrSample");
         return "index";
     }
+
+    @GetMapping("/login") 
+    public String getLogin() {
+        return "login";
+    }
 }
