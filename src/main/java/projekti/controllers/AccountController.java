@@ -1,6 +1,8 @@
 package projekti.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +24,12 @@ public class AccountController {
 
     @GetMapping("/users")
     public String getIndex(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Account currentAccount = accountRepository.findByUsername(username);
 
         model.addAttribute("users", accountRepository.findAll());
-        model.addAttribute("loggedUserProfileStr", "MrSample");
+        model.addAttribute("loggedUserProfileStr", currentAccount.getProfileName());
         
         return "users/index";
     }
