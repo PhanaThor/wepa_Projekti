@@ -26,7 +26,9 @@
                                 <a class="nav-link" href="/users/profile-str" th:href="@{/users/{profileName}(profileName=${loggedUserProfileStr})}">My profile</a>
                             </li>
                         </ul>
-                        <a class="btn btn-outline-danger ml-3" href="/logout" th:href="@{/logout}">Logout</a>
+                        <form action="/logout" th:action="@{/logout}" method="post">					
+                            <input class="btn btn-outline-danger ml-3" type="submit" value="Logout" />
+                        </form>
                     </div>                
                 </div>
             </nav>
