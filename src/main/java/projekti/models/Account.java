@@ -21,6 +21,6 @@ public class Account extends AbstractPersistable<Long> {
     private String profileName;
     private String name;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AccountPicture> pictures;
 }
