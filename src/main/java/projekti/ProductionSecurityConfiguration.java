@@ -3,6 +3,7 @@ package projekti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,22 +12,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
+@Profile("production")
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     @Autowired
     private UserDetailsService userDetailsService;
     
     @Override
-    protected void configure(HttpSecurity httpSec) throws Exception {
-        httpSec.csrf().disable();
-        httpSec.headers().frameOptions().sameOrigin();    
+    protected void configure(HttpSecurity httpSec) throws Exception { 
         httpSec.authorizeRequests()
                 .antMatchers("/css", "/css/*").permitAll()
                 .antMatchers("/users/register").permitAll()
-                .antMatchers("/h2-console","/h2-console/**").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login").permitAll().and()
                 .logout().permitAll();
