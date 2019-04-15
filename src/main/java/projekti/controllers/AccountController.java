@@ -67,6 +67,6 @@ public class AccountController {
         account.setPassword(passwordEncoder.encode(password));
         accountRepository.save(account);
 
-        return "redirect:/login";
+        return "redirect:/users/register?created";
     }
 }

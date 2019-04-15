@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 @Controller
 public class DefaultController {
     
-    @GetMapping("/")
+    @GetMapping("*")
     public String getIndex(Model model) {
         return "redirect:/users";
     }
