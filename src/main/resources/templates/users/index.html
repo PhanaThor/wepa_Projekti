@@ -5,8 +5,10 @@
     </head>
     <body>
         <div class="container" layout:fragment="content">
-            <div class="jumbotron">
-                <h1 class="display-4">List of users</h1>
+            <div class="row">
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2" th:each="user : ${users}">
+                    This is: <span th:text="${user.name}">user</span>
+                </div>
             </div>
         </div>
     </body>
