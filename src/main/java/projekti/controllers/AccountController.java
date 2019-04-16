@@ -1,9 +1,6 @@
 package projekti.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,33 +8,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import projekti.models.Account;
-import projekti.repositories.AccountRepository;
+import projekti.services.AccountService;
 
 @Controller
 public class AccountController {
     @Autowired
-    PasswordEncoder passwordEncoder;
-    
-    @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @GetMapping("/users")
     public String getIndex(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        Account currentAccount = accountRepository.findByUsername(username);
 
-        model.addAttribute("users", accountRepository.findAll());
-        model.addAttribute("loggedUserProfileStr", currentAccount.getProfileName());
+        model.addAttribute("users", accountService.getAllAccounts());
+        model.addAttribute("account", accountService.getLoggedAccount());
         
         return "users/index";
     }
 
     @GetMapping("/users/{profileName}")
     public String getProfile(Model model, @PathVariable String profileName) throws Exception {
-        model.addAttribute("profileName", profileName);
-        model.addAttribute("profile", accountRepository.findByProfileName(profileName));
+        model.addAttribute("viewedAccount", accountService.getAccountByProfileName(profileName));
+        model.addAttribute("account", accountService.getLoggedAccount());
 
         return "users/profile";
     }
@@ -49,11 +39,11 @@ public class AccountController {
 
     @PostMapping("/users/register")
     public String postRegisterAccount(@RequestParam String name, @RequestParam String profileName, @RequestParam String username, @RequestParam String password, @RequestParam String password2) {
-        if(accountRepository.findByUsername(username) != null) {
+        if(accountService.userExists(username, "")) {
             return "redirect:/users/register?uexists";
         }
 
-        if(accountRepository.findByProfileName(profileName) != null) {
+        if(accountService.userExists("", profileName)) {
             return "redirect:/users/register?pexists";
         }
 
@@ -64,13 +54,6 @@ public class AccountController {
         if(!password.equals(password2)) {
             return "redirect:/users/register?mismatch";
         }
-
-        Account account = new Account();
-        account.setName(name);
-        account.setProfileName(profileName);
-        account.setUsername(username);
-        account.setPassword(passwordEncoder.encode(password));
-        accountRepository.save(account);
 
         return "redirect:/users/register?created";
     }

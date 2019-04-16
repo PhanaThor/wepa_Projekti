@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountPicture extends AbstractPersistable<Long> {
-    private Boolean isProfilePicture;
     private String description;    
     @Lob
     @Basic(fetch = FetchType.LAZY)

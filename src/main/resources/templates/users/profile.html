@@ -5,13 +5,13 @@
     </head>
     <body>
         <div class="container" layout:fragment="content">
-            <div class="jumbotron" th:if="${profile != null}">
-                <h2><span th:text="${profileName}"></span></h2>
-                <h2><span th:text="${profile.name}"></span></h2>
+            <div class="jumbotron" th:if="${viewedAccount != null}">
+                <h2><span th:text="${viewedAccount.profileName}"></span></h2>
+                <h2><span th:text="${viewedAccount.name}"></span></h2>
             </div>
-            <div class="jumbotron" th:if="${profile == null}">
+            <div class="jumbotron" th:if="${viewedAccount == null}">
                 <h1 class="display-4">Profile not found!</h1>
-                <p class="lead">Profile &quot;<span th:text="${profileName}"></span>&quot; could not be found!</p>                    
+                <p class="lead">Profile could not be found!</p>                    
             </div>
         </div>
     </body>

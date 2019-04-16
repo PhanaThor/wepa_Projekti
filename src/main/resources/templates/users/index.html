@@ -6,8 +6,16 @@
     <body>
         <div class="container" layout:fragment="content">
             <div class="row">
-                <div class="col-6 col-sm-4 col-md-3 col-lg-2" th:each="user : ${users}">
-                    This is: <span th:text="${user.name}">user</span>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 my-3" th:each="user : ${users}">
+                    <a th:href="@{/users/{profileStr}(profileStr=${user.profileName})}">
+                        <div class="card border-dark">
+                            <img class="card-img-top" th:if="${user.profilePicture == null}" th:src="@{/img/no-picture.png}" alt="Profile Picture">
+                            <img class="card-img-top" th:if="${user.profilePicture != null}" th:src="@{/users/{profileStr}/picture/{id}/content(profileStr=${user.profileName},id=${user.profilePicture.id})" alt="Profile Picture">
+                            <div class="card-body">                            
+                                <span class="text-center" th:text="${user.name}">user</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
