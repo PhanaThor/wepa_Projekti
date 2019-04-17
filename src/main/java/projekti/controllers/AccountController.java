@@ -17,8 +17,7 @@ public class AccountController {
 
     @GetMapping("/users")
     public String getUserList(Model model) {
-
-        model.addAttribute("users", accountService.getAllAccounts());
+        model.addAttribute("accounts", accountService.getAllAccounts());
         model.addAttribute("account", accountService.getLoggedAccount());
         
         return "users/list";
@@ -39,11 +38,11 @@ public class AccountController {
 
     @PostMapping("/users/register")
     public String postRegisterAccount(@RequestParam String name, @RequestParam String profileName, @RequestParam String username, @RequestParam String password, @RequestParam String password2) {
-        if(accountService.userExists(username, "")) {
+        if(accountService.accountExists(username, "")) {
             return "redirect:/users/register?uexists";
         }
 
-        if(accountService.userExists("", profileName)) {
+        if(accountService.accountExists("", profileName)) {
             return "redirect:/users/register?pexists";
         }
 

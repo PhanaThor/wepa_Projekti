@@ -20,18 +20,33 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-
-    public Boolean userExists(String username, String profileName) {
+    /**
+     * Checks if the Account exists in the database with given username and/or profile name
+     * 
+     * @param username
+     * @param profileName
+     * @return {@code true} If the accounts exists in the database, {@code false} otherwise
+     */
+    public Boolean accountExists(String username, String profileName) {
         if(username.equals("")) {
             return accountRepository.findByProfileName(profileName) != null;
         }
         else if(profileName.equals("")) {
             return accountRepository.findByUsername(username) != null;
         }
-
-        return false;
+        else {
+            return accountRepository.findByUsernameAndProfileName(username, profileName) != null;
+        }
     }
-
+    
+    /**
+     * Creates a new Account to database with given values.
+     * 
+     * @param name
+     * @param profileName
+     * @param username 
+     * @param password
+     */
     public void createAccount(String name, String profileName, String username, String password) {
         Account account = new Account();
         account.setName(name);
@@ -41,10 +56,20 @@ public class AccountService {
         accountRepository.save(account);
     }
 
+    /**
+     * Returns all {@code Account}s in database 
+     * 
+     * @return A {@code List} of {@code Account}s.
+     */
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
 
+    /**
+     * Returns the Account for the currently logged user.
+     * 
+     * @return Current users Account from database.
+     */
     public Account getLoggedAccount() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
@@ -53,6 +78,12 @@ public class AccountService {
         return currentAccount;
     }
 
+    /**
+     * Returns the Account with the given profile name.
+     * 
+     * @param profileName Profile name of the Account to be found.
+     * @return Account from the database matching the profile name.
+     */
     public Account getAccountByProfileName(String profileName) {
         return accountRepository.findByProfileName(profileName);
     }

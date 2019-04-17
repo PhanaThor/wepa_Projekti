@@ -1,26 +1,22 @@
 package projekti.controllers;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
-import org.eclipse.jetty.util.security.Password;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import projekti.models.Account;
-import projekti.repositories.AccountRepository;
+import projekti.services.AccountService;
 
 import org.springframework.ui.Model;
 
 @Controller
-public class DefaultController {
-    
+public class DefaultController {    
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @GetMapping("*")
     public String getIndex(Model model) {
@@ -32,18 +28,25 @@ public class DefaultController {
         return "login";
     }
 
-    /*
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final List<String> ACCOUNT_NAMES = Arrays.asList("Salla", "Ilta", "Aino", "Veikko", "Eeva", "Aili", "Hanna", "Teppo", "Ilse", "Pauli");
+		
     @PostConstruct
-    public void init() {
-        for(int i=1;i<=10;i++) {
-            String value = "test" + i;
-            Account account = new Account();
-            account.setName(value);
-            account.setProfileName(value);
-            account.setUsername(value);
-            account.setPassword(passwordEncoder.encode(value));
-            accountRepository.save(account);
+    public void init() {        
+        if(accountService.getAllAccounts().size() == 0) {
+            for(String name : ACCOUNT_NAMES) {
+                accountService.createAccount(name, randomAlphaNumericString(8), name, randomAlphaNumericString(10));
+            }
         }
     }
-    */
+    
+    private static String randomAlphaNumericString(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int)(Math.random() * ALPHA_NUMERIC_STRING.length());
+            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        }
+
+        return builder.toString();
+    }
 }

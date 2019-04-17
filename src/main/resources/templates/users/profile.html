@@ -5,13 +5,38 @@
     </head>
     <body>
         <div class="container" layout:fragment="content">
-            <div class="jumbotron" th:if="${viewedAccount != null}">
-                <h2><span th:text="${viewedAccount.profileName}"></span></h2>
-                <h2><span th:text="${viewedAccount.name}"></span></h2>
+            <div class="card text-white" th:if="${viewedAccount != null}">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span th:text="${viewedAccount.profileName}">Profile</span>&apos;s profile
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="card">
+                                <img class="card-img-top" th:if="${viewedAccount.profilePicture == null}" th:src="@{/img/no-picture.png}" alt="Profile Picture">
+                                <img class="card-img-top" th:if="${viewedAccount.profilePicture != null}" th:src="@{/users/{profileStr}/picture/{id}/content(profileStr=${user.profileName},id=${user.profilePicture.id})" alt="Profile Picture">
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-8 col-md-9 col-lg-10">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Name: <span th:text="${viewedAccount.name}"></span></li>
+                                    <li class="list-group-item">Profile name: <span th:text="${viewedAccount.profileName}"></span></li>
+                                    <li class="list-group-item">Username: <span th:text="${viewedAccount.username}"></span></li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                </div>
             </div>
-            <div class="jumbotron" th:if="${viewedAccount == null}">
-                <h1 class="display-4">Profile not found!</h1>
-                <p class="lead">Profile could not be found!</p>                    
+            <div class="card border-danger text-white" th:if="${viewedAccount == null}">
+                <div class="card-body text-alert">
+                    <h5 class="card-title">Profile not found</h5>
+                    Profile <span th:text="${profileName}" class="text-warning"></span> could not be found!
+                </div>
             </div>
         </div>
     </body>
