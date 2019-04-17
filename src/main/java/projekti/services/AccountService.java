@@ -32,7 +32,7 @@ public class AccountService {
         return false;
     }
 
-    public void createAccount(String username, String password, String name, String profileName) {
+    public void createAccount(String name, String profileName, String username, String password) {
         Account account = new Account();
         account.setName(name);
         account.setProfileName(profileName);

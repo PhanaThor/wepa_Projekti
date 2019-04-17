@@ -16,12 +16,12 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping("/users")
-    public String getIndex(Model model) {
+    public String getUserList(Model model) {
 
         model.addAttribute("users", accountService.getAllAccounts());
         model.addAttribute("account", accountService.getLoggedAccount());
         
-        return "users/index";
+        return "users/list";
     }
 
     @GetMapping("/users/{profileName}")
@@ -54,6 +54,8 @@ public class AccountController {
         if(!password.equals(password2)) {
             return "redirect:/users/register?mismatch";
         }
+
+        accountService.createAccount(name, profileName, username, password);
 
         return "redirect:/users/register?created";
     }
