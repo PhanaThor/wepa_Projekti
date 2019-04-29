@@ -38,23 +38,6 @@ public class AccountService {
             return accountRepository.findByUsernameAndProfileName(username, profileName) != null;
         }
     }
-    
-    /**
-     * Creates a new Account to database with given values.
-     * 
-     * @param name
-     * @param profileName
-     * @param username 
-     * @param password
-     */
-    public void createAccount(String name, String profileName, String username, String password) {
-        Account account = new Account();
-        account.setName(name);
-        account.setProfileName(profileName);
-        account.setUsername(username);
-        account.setPassword(passwordEncoder.encode(password));
-        accountRepository.save(account);
-    }
 
     public void createAccount(Account account) {
         String rawPassword = account.getPassword();

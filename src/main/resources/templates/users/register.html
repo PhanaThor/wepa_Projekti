@@ -52,7 +52,7 @@
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" th:classappend="${#fields.hasErrors('password')} ? is-invalid : ''" id="password" name="password" placeholder="Password" maxlength="16">
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}">
-                                Please give your password. Must be 8-16 characters long.
+                                Please give your password.
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Register</button>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import projekti.models.Account;
 import projekti.services.AccountService;
 
 import org.springframework.ui.Model;
@@ -35,7 +36,12 @@ public class DefaultController {
     public void init() {        
         if(accountService.getAllAccounts().size() == 0) {
             for(String name : ACCOUNT_NAMES) {
-                accountService.createAccount(name, randomAlphaNumericString(8), name, randomAlphaNumericString(10));
+                Account account = new Account();
+                account.setName(name);
+                account.setPassword(randomAlphaNumericString(10));
+                account.setProfileName(randomAlphaNumericString(6));
+                account.setUsername(name);
+                accountService.createAccount(account);
             }
         }
     }

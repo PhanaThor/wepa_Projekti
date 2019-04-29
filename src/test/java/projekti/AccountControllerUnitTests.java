@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class AccountControllerTests {
+public class AccountControllerUnitTests {
 
 	private final String API_URI = "/users";
 
@@ -34,7 +34,7 @@ public class AccountControllerTests {
 	}
 
 	@Test
-	public void tryGetUsersWithoutAuthentication() throws Exception {
+	public void userCannotListUsersWithoutAuthentication() throws Exception {
 		mockMvc.perform(get(API_URI)).andExpect(status().is3xxRedirection());
 	}
 }
