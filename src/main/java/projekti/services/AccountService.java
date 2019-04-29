@@ -56,6 +56,12 @@ public class AccountService {
         accountRepository.save(account);
     }
 
+    public void createAccount(Account account) {
+        String rawPassword = account.getPassword();
+        account.setPassword(passwordEncoder.encode(rawPassword));        
+        accountRepository.save(account);
+    }
+
     /**
      * Returns all {@code Account}s in database 
      * 

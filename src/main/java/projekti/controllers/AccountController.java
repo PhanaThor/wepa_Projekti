@@ -1,13 +1,17 @@
 package projekti.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import projekti.models.Account;
 import projekti.services.AccountService;
 
 @Controller
@@ -32,29 +36,25 @@ public class AccountController {
     }
 
     @GetMapping("/users/register")
-    public String getRegisterAccount() {
+    public String getRegisterAccount(@ModelAttribute Account account) {
         return "users/register";
     }
 
     @PostMapping("/users/register")
-    public String postRegisterAccount(@RequestParam String name, @RequestParam String profileName, @RequestParam String username, @RequestParam String password, @RequestParam String password2) {
-        if(accountService.accountExists(username, "")) {
+    public String postRegisterAccount(@Valid @ModelAttribute Account account, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "users/register";
+        }
+
+        if(accountService.accountExists(account.getUsername(), "")) {
             return "redirect:/users/register?uexists";
         }
 
-        if(accountService.accountExists("", profileName)) {
+        if(accountService.accountExists("", account.getProfileName())) {
             return "redirect:/users/register?pexists";
         }
 
-        if(name.equals("") || profileName.equals("") || username.equals("") || password.equals("") || password2.equals("")) {
-            return "redirect:/users/register?missing";
-        }
-
-        if(!password.equals(password2)) {
-            return "redirect:/users/register?mismatch";
-        }
-
-        accountService.createAccount(name, profileName, username, password);
+        accountService.createAccount(account);
 
         return "redirect:/users/register?created";
     }
