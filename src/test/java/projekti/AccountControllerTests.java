@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class AccountControllerUnitTests {
+public class AccountControllerTests {
 
 	private final String API_URI = "/users";
 
