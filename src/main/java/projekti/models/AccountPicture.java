@@ -20,8 +20,5 @@ public class AccountPicture extends AbstractPersistable<Long> {
     private String description;    
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    private byte[] data;
-
-    @ManyToOne
-    private Account owner;
+    private byte[] content;
 }

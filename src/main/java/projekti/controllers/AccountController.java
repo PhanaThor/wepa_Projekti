@@ -1,5 +1,7 @@
 package projekti.controllers;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import projekti.models.Account;
 import projekti.services.AccountService;
@@ -57,5 +62,23 @@ public class AccountController {
         accountService.createAccount(account);
 
         return "redirect:/users/register?created";
+    }
+
+    @PostMapping(path = "/users/{profileName}/picture")
+    public String postPicture(Model model, @PathVariable String profileName, @RequestParam("file") MultipartFile file, @RequestParam String description) throws IOException {
+        model.addAttribute("viewedAccount", accountService.getAccountByProfileName(profileName));
+        model.addAttribute("account", accountService.getLoggedAccount());
+        
+        if(file.getContentType().equals("image/png")) {
+            accountService.savePicture(profileName, file.getBytes(), description);
+        }
+        
+        return "redirect:/users/" + profileName;
+    } 
+
+    @GetMapping(path = "/users/{profileName}/picture/{id}", produces = "image/png")
+    @ResponseBody
+    public byte[] getPicture(@PathVariable String profileName, @PathVariable Long id) {
+        return accountService.getPicture(profileName, id);
     }
 }

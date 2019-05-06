@@ -2,6 +2,8 @@ package projekti.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import projekti.models.Account;
+import projekti.models.AccountPicture;
+import projekti.repositories.AccountPictureRepository;
 import projekti.repositories.AccountRepository;
 
 @Service
@@ -19,6 +23,9 @@ public class AccountService {
     
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountPictureRepository accountPictureRepository;
 
     /**
      * Checks if the Account exists in the database with given username and/or profile name
@@ -76,4 +83,21 @@ public class AccountService {
     public Account getAccountByProfileName(String profileName) {
         return accountRepository.findByProfileName(profileName);
     }
+
+
+	public byte[] getPicture(String profileName, Long id) {
+        Account account = accountRepository.findByProfileName(profileName);
+        AccountPicture accountPicture = accountPictureRepository.findByOwnerAndId(account, id);
+        
+		return accountPicture.getContent();
+	}
+
+    @Transactional
+	public void savePicture(String profileName, byte[] bytes, String description) {
+        Account account = accountRepository.findByProfileName(profileName);
+        AccountPicture accountPicture = new AccountPicture();
+        accountPicture.setContent(bytes);
+        accountPicture.setDescription(description); 
+        account.getPictures().add(accountPicture);
+	}
 }

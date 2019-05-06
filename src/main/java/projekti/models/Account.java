@@ -32,9 +32,9 @@ public class Account extends AbstractPersistable<Long> {
     @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany
     private List<AccountPicture> pictures;
 
-    @OneToOne(mappedBy ="owner")
+    @OneToOne
     private AccountPicture profilePicture;
 }
