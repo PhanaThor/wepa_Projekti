@@ -10,7 +10,7 @@
                     <a th:href="@{/users/{profileStr}(profileStr=${account.profileName})}">
                         <div class="card border-dark">
                             <img class="card-img-top" th:if="${account.profilePicture == null}" th:src="@{/img/no-picture.png}" alt="Profile Picture">
-                            <img class="card-img-top" th:if="${account.profilePicture != null}" th:src="@{/users/{profileStr}/picture/{id}(profileStr=${account.profileName},id=${account.profilePicture.id})" alt="Profile Picture">
+                            <img class="card-img-top" th:if="${account.profilePicture != null}" th:src="@{/picture/{id}(id=${account.profilePicture.id})}" alt="Profile Picture">
                             <div class="card-body">                            
                                 <span class="card-text text-center" th:text="${account.name}">user</span>
                             </div>

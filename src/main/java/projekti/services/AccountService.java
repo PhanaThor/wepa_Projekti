@@ -1,6 +1,7 @@
 package projekti.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -85,19 +86,29 @@ public class AccountService {
     }
 
 
-	public byte[] getPicture(String profileName, Long id) {
-        Account account = accountRepository.findByProfileName(profileName);
-        AccountPicture accountPicture = accountPictureRepository.findByOwnerAndId(account, id);
-        
-		return accountPicture.getContent();
+	public byte[] getPicture(Long id) {
+        Optional<AccountPicture> accountPicture = accountPictureRepository.findById(id);
+        if(accountPicture.isPresent()) {
+            return accountPicture.get().getContent();
+        }
+
+		return null;
 	}
 
     @Transactional
 	public void savePicture(String profileName, byte[] bytes, String description) {
-        Account account = accountRepository.findByProfileName(profileName);
+        Account viewedAccount = accountRepository.findByProfileName(profileName);
         AccountPicture accountPicture = new AccountPicture();
         accountPicture.setContent(bytes);
         accountPicture.setDescription(description); 
-        account.getPictures().add(accountPicture);
+        accountPictureRepository.save(accountPicture);
+        viewedAccount.getPictures().add(accountPicture);
+	}
+
+    @Transactional
+	public void setAsProfilePicture(String profileName, Long id) {
+        Account viewedAccount = accountRepository.findByProfileName(profileName);
+        AccountPicture accountPicture = accountPictureRepository.findById(id).get();
+        viewedAccount.setProfilePicture(accountPicture);
 	}
 }

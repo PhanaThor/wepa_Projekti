@@ -64,11 +64,8 @@ public class AccountController {
         return "redirect:/users/register?created";
     }
 
-    @PostMapping(path = "/users/{profileName}/picture")
-    public String postPicture(Model model, @PathVariable String profileName, @RequestParam("file") MultipartFile file, @RequestParam String description) throws IOException {
-        model.addAttribute("viewedAccount", accountService.getAccountByProfileName(profileName));
-        model.addAttribute("account", accountService.getLoggedAccount());
-        
+    @PostMapping("/users/{profileName}/picture")
+    public String postPicture(@PathVariable String profileName, @RequestParam("file") MultipartFile file, @RequestParam String description) throws IOException {               
         if(file.getContentType().equals("image/png")) {
             accountService.savePicture(profileName, file.getBytes(), description);
         }
@@ -76,9 +73,16 @@ public class AccountController {
         return "redirect:/users/" + profileName;
     } 
 
-    @GetMapping(path = "/users/{profileName}/picture/{id}", produces = "image/png")
+    @PostMapping("/users/{profileName}/profilePicture/{id}")
+    public String setProfilePicture(@PathVariable String profileName, @PathVariable Long id) {
+        accountService.setAsProfilePicture(profileName, id);
+
+        return "redirect:/users/" + profileName;
+    }
+
+    @GetMapping(path = "/picture/{id}", produces = "image/png")
     @ResponseBody
-    public byte[] getPicture(@PathVariable String profileName, @PathVariable Long id) {
-        return accountService.getPicture(profileName, id);
+    public byte[] getPicture(@PathVariable Long id) {
+        return accountService.getPicture(id);
     }
 }

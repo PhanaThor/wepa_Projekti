@@ -22,8 +22,7 @@ public class DefaultSecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity httpSec) throws Exception {
-        httpSec.csrf().disable();
-        httpSec.headers().frameOptions().sameOrigin();    
+        httpSec.csrf().disable().headers().frameOptions().sameOrigin();    
         httpSec.authorizeRequests()
                 .antMatchers("/h2-console","/h2-console/**").permitAll()
                 .antMatchers("/css", "/css/*").permitAll()
