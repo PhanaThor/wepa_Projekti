@@ -2,8 +2,8 @@
 
 | Branch        | Status        |
 | ------------- |:-------------:|
-| Master      | [![Build Status](https://travis-ci.org/PhanaThor/wepa_Projekti.svg?branch=master)](https://travis-ci.org/PhanaThor/wepa_Projekti) |
-| Development      | [![Build Status](https://travis-ci.org/PhanaThor/wepa_Projekti.svg?branch=development)](https://travis-ci.org/PhanaThor/wepa_Projekti) |
+| Master      | ![Build status](https://travis-ci.org/PhanaThor/wepa_Projekti.svg?branch=master "Build status") |
+| Development      | ![Build status](https://travis-ci.org/PhanaThor/wepa_Projekti.svg?branch=development "Build status") |
 
 
 Web-palvelinohjelmointi Java 2019, MOOC-kurssin projektityö  
