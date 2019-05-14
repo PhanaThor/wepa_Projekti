@@ -9,6 +9,8 @@
 
 Web-palvelinohjelmointi Java 2019, MOOC-kurssin projektityö.
 
-Arvosteltavaksi lähetetyn version lähdekoodit ovat Review -branchissa. Lisäksi arvostelussa ollut versio löytyy osoitteesta [https://wepaprojekti.herokuapp.com/](https://wepaprojekti.herokuapp.com/ "wepa_projekti")
+Projektin ohjeistus löytyy [täältä](instructions.md).
 
-Kurssi löytyy osoitteesta [https://web-palvelinohjelmointi-19.mooc.fi/](https://web-palvelinohjelmointi-19.mooc.fi/ "Web-palvelinohjelmointi Java 2019")
+Arvosteltavaksi lähetetyn version lähdekoodit ovat Review -branchissa. Lisäksi arvosteluun lähetetty versio löytyy osoitteesta [https://wepaprojekti.herokuapp.com/](https://wepaprojekti.herokuapp.com/ "wepa_projekti").
+
+Lisää tietoa kurssista löytyy osoitteesta [https://web-palvelinohjelmointi-19.mooc.fi/](https://web-palvelinohjelmointi-19.mooc.fi/ "Web-palvelinohjelmointi Java 2019").
